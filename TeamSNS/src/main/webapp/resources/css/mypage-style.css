@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+* {
+	font-size: 1.3rem;
+}
+
+@media ( min-width : 768px) {
+	.content {
+		padding: 40px;
+	}
+}
+
+@media ( max-width : 767px) {
+	.content {
+		padding: 12px;
+	}
+	
+	
+}
+
+#main-section {
+	margin: 20px;
+	border: solid;
+}
+
+.user_register {
+	font-size: 20px;
+}
+
+#user_id, #user_pw, #user_name, #user_nickname, #user_number, #userkkoid,
+	#user_email {
+	width: 250px;
+}
+
+.user_gender {
+	width: 100px;
+}
+
+

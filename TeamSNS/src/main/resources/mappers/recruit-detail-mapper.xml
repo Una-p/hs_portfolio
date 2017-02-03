@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.penta.hyunsun.recruit-detail-mapper">
+<sql id="find_pid">
+SELECT pid FROM pentacore.recruit_project WHERE rbno = #{rbno }
+</sql>
+
+<select id="select_recruit" resultType="edu.hexa.teamsns.domain.RecruitProjectVO">
+SELECT * FROM pentacore.recruit_project WHERE rbno = #{rbno }
+</select>
+
+<select id="select_project" resultType="edu.hexa.teamsns.domain.ProjectVO">
+SELECT * FROM pentacore.project 
+WHERE pid = (
+<include refid="find_pid" />
+)
+</select>
+
+<select id="select_part" resultType="edu.hexa.teamsns.domain.ManageProjectPartVO">
+<!-- SELECT * FROM pentacore.manage_project_part 
+WHERE pid = 
+(<include refid="find_pid" />) -->
+SELECT part.*, user.name
+FROM pentacore.manage_project_part AS part
+LEFT JOIN pentacore.user AS user
+ON user.uid = part.user_id
+WHERE part.pid = 
+(<include refid="find_pid" />)
+</select>
+
+<select id="select_skill" resultType="edu.hexa.teamsns.domain.RequiredSkillVO">
+SELECT * FROM pentacore.required_skill
+WHERE pid = 
+(<include refid="find_pid" />)
+</select>
+
+<select id="select_leader" resultType="edu.hexa.teamsns.domain.UserVO">
+SELECT * FROM pentacore.user
+WHERE uid = (
+	SELECT leader_uid FROM pentacore.project_leader
+	WHERE pid = (
+		<include refid="find_pid" />
+	)
+)
+</select>
+
+<select id="apply_cnt" resultType="Integer">
+SELECT * FROM pentacore.manage_recruit;
+SELECT count(*)
+FROM 
+pentacore.manage_recruit
+WHERE part_pk = #{part_pk };
+</select>
+
+
+<!-- 조회수 -->
+<update id="update_hits">
+UPDATE pentacore.recruit_project SET recruit_hits = recruit_hits + 1 
+WHERE rbno = #{rbno }
+</update>
+
+<!-- 지원 -->
+<insert id="apply_project">
+INSERT INTO pentacore.manage_recruit (part_pk, user_id, comment) VALUE (#{part_pk}, #{user_id}, #{comment})
+</insert>
+
+<!-- 1 ID = 1 프로젝트 - 1 파트 -->
+<select id="overlap_test1" resultType="INTEGER">
+SELECT count(*)
+FROM 
+pentacore.manage_recruit AS recruit
+LEFT JOIN pentacore.manage_project_part AS part
+ON part.part_pk = recruit.part_pk 
+WHERE part.pid = #{pid} AND recruit.user_id = #{user_id}
+</select>
+
+
+
+</mapper>

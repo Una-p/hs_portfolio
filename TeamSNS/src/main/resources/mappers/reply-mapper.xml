@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="edu.hexa.leejaehoon.replyMapper">
+  	
+  	<insert id="insert">
+  		INSERT INTO pentacore.tt_reply (tt_bno, replier_uid, content) VALUE (#{tt_bno}, #{replier_uid }, #{content });
+  	</insert>
+  	
+  	<select id="select" resultType="edu.hexa.leejaehoon.domain.ReplyVO">
+  		SELECT * FROM pentacore.tt_reply WHERE tt_bno= #{tt_bno } ORDER BY regdate desc; 
+  	</select>  
+  	
+  </mapper>

@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+/*font-family: 'Jeju Gothic', sans-serif;*/
+@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+/*font-family: 'Jeju Myeongjo', serif;*/
+@import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+/*font-family: 'Jeju Hallasan', cursive;*/
+@import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
+/*font-family: 'KoPub Batang', serif;*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+/*font-family: 'Nanum Gothic', sans-serif;*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+/*font-family: 'Nanum Brush Script', cursive;*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+/*font-family: 'Nanum Gothic Coding', monospace;*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+/*font-family: 'Nanum Pen Script', cursive;*/
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+/*font-family: 'Noto Sans KR', sans-serif;*/
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+/*font-family: 'Hanna', sans-serif;*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+/*font-family: 'Nanum Myeongjo', serif;*/
+
+
+* {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+body {
+	margin: 16px;
+	width: 600px;
+}
+
+div.districtset {
+	margin-bottom: 20px;
+	width: 500px;
+}
+
+.district {
+	margin-top: 5px;
+	font-size: 12px;
+	margin-bottom: 5px;
+}
+
+.district li {
+	display: inline;
+	border: 1px solid gray;
+	margin: 2px 3px 2px 0px;
+	padding: 0px 3px 0px 3px;
+	box-shadow: 2px 2px 1px rgba(0, 0, 0, .2);
+	float: left;
+	/*margin: 5px 5px 5px 0px;*/
+}
+
+.district li a {
+	text-decoration:none; 
+	color:black;
+}
+	
+div.cardlist {
+	height: 180px; /* cardlist class의 높이 지정  */
+	border : 1px solid gray; /* 외부 경계값 설정. 굵기, 선타입, 선색 */
+	width: 500px;
+	margin: 20px auto 10px auto;
+
+	padding-left: 10px; /* border기준 안쪽으로 여백 주기  */
+	padding-top: 10px;
+	padding-right: 10px;
+	
+	box-shadow: 2px 2px 1px rgba(0, 0, 0, .2); /* 오른쪽, 위쪽, 그림자 범위, 그림자 색상(r, g, b, 흐림정도) */ 	
+	clear: left;
+	float: left;
+}
+
+#logo {
+	display: inline;
+	height: 50px;
+	width: 50px;
+	float: left;
+}
+
+h4.teamdesc {
+	padding-left: 65px;
+	font-family: 'Nanum Gothic';
+}
+
+h5.teamname {
+	padding-top: 3px;
+	padding-left: 65px;
+	font-family: 'Nanum Gothic';
+}
+.counts li{
+	font-size: 12px;
+	float: right;
+	display: block;
+}
+.dates li {
+	font-size: 12px;
+	clear:right;
+	float: right;
+}
+
+.skillbox {
+	margin-top: 20px;
+}
+.skills li {
+	display: inline;
+	border: 1px solid gray;
+	font-size: 12px;
+	padding: 0px 3px 0px 3px; /* 상 우 하 좌, 시계방향 */
+	box-shadow: 2px 2px 1px rgba(0, 0, 0, .2)
+}
+
+.memberbox{
+	margin-top: 20px;
+}
+.memberNames th {
+	border: 1px solid gray;
+	font-size: 12px;
+	padding: 0px 3px 0px 3px;
+	box-shadow: 2px 2px 1px rgba(0, 0, 0, .2);
+	font-family: 'Nanum Gothic';
+}
+.memberPhotos td {
+	text-align: center;
+}
+.memberPhotos td img{
+	height: 30px;
+	width: 30px;
+	border-radius: 30px;
+	margin-top: 3px;
+}

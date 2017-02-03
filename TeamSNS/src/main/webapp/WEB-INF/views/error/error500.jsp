@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>500 에러 발생</title>
+</head>
+<body>
+<strong>서버에 내부 에러가 발생했습니다.</strong>
+<br><br>
+JSP에 익셉션 등이 없는지 확인해보시기 바랍니다. :(
+</body>
+</html>

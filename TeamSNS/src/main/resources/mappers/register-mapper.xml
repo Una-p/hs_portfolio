@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hexa.minjee.RegisterMapper">
+
+	<!-- 회원가입 연동 후 user_id 추가 -->
+	
+	<insert id="insert_project">
+	insert into project(pid, pname, category, start, end, intro, district)
+	values (#{pid}, #{pname}, #{category}, #{start}, #{end}, #{intro}, #{district})
+	</insert>
+	
+	<insert id="insert_part">
+	insert into manage_project_part(part_pk, pid, user_id, part)
+	value (#{part_pk}, #{pid}, #{user_id}, #{part})
+	</insert>
+	
+	<insert id="insert_skill">
+	insert into required_skill
+	value (#{pid}, #{skill_1}, #{skill_2}, #{skill_3}, #{skill_4}, #{skill_5}, #{skill_6}, #{skill_7}, #{skill_8}, #{skill_9}, #{skill_10})
+	</insert>
+	
+	<insert id="insert_recruit">
+	insert into recruit_project(pid, title, rcstart, rcend)
+	value (#{pid}, #{title}, #{rcstart}, #{rcend})
+	</insert>
+	
+	<insert id="insert_leader">
+	insert into project_leader
+	values (#{pid}, #{leader_uid})
+	</insert>
+	
+	<select id="select_user" resultType="edu.hexa.teamsns.domain.UserVO">
+	select * from user
+	where uid = #{uid}
+	</select>
+	
+</mapper>

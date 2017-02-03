@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hexa.leejaehoon.signUp">
+ 	
+<!--  	<insert id="insert">
+       insert into user(uid,
+                    pw,
+                   name,
+                   nickname,
+                    profile_img,
+                    phone,
+                    kkoid,
+                    email)
+      values (
+            #{uid},
+             #{pw},
+             #{name},   
+             #{nickname}, 
+             #{profile_img},
+             #{phone}, 
+             #{kkoid}, 
+             #{email} )                    
+    </insert> -->
+    
+    <select id="selectid" resultType="Integer">
+    	SELECT count(*) FROM pentacore.user WHERE uid = #{uid}
+    </select>
+    
+    <select id="selectnick" resultType="Integer">
+    	SELECT count(*) FROM pentacore.user
+		WHERE nickname = #{nickname}
+    </select>
+    
+    
+    
+    
+	<insert id="singup">
+	INSERT INTO pentacore.user VALUE (#{uid}, #{pw}, #{name}, #{nickname}, null, #{phone}, #{kkoid}, #{email}, 1, #{gender}, #{birth}, #{address})
+	</insert>
+	    
+	<select id="login" resultType="edu.hexa.leejaehoon.domain.SignUpVO">
+	select * from user where uid = #{uid} and pw = #{pw}
+	</select>
+	 	
+ 	
+</mapper> 

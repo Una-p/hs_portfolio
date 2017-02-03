@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+body {
+	width: 1400px;
+}
+
+#div_info_list_main {
+	width: 800px;
+	border: solid;
+	margin: 20px;
+	float: left;
+}
+
+#div_info_list_main>div {
+	margin: 20px;
+	font-size: 20px;
+}
+
+.team_part {
+	width: 420px;
+}
+
+#team_part_1 {
+	background-color: goldenrod;
+}
+
+.required_skill {
+	width: 240px;
+	display: inline-block;
+}
+
+#content {
+	overflow: hidden;
+}
+
+aside {
+	float: right;
+	width: 520px;
+	height: 900px;
+	margin: 20px;
+	background-color: aqua;
+	font-size: 20px;
+}
+
+aside>div {
+	margin: 20px;
+}
+
+table {
+	font-size: 15px;
+}
+
+.table_member_name {
+	width: 80px;
+}
+
+#table_leader_phone {
+	width: 100px;
+}
+
+#table_member_part {
+	width: 320px;
+}
+
+.date {
+	width: 200px;
+}

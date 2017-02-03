@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    /* display: flex;
+    flex-direction: column;
+    max-width: 950px; */
+    overflow-y: scroll; 
+}
+
+@media ( min-width : 768px) {
+	.content {
+		padding: 40px;
+	}
+}
+
+@media ( max-width : 767px) {
+	.content {
+		padding: 20px;
+	}
+}
+
+.districtset {
+	
+	max-width: 670px; 
+    min-width: 320px;
+    margin-bottom: 20px;
+    width: 100%;
+    /* padding: 10px 0px 5px 10px; */
+    background-color: #F7FBFC;
+    font-family: 'Jeju Gothic', sans-serif !important;
+    color: black;
+}
+
+.districtset h{
+	font-family: 'Noto Sans KR' !important;
+}
+
+
+.district {
+    margin: 20px 0;
+    font-size: 0.875rem;
+    line-height: 1.8;
+}
+
+.district li {
+    display: inline;
+    border: 1px solid gray;
+    margin: 2px 3px 2px 0px;
+    padding: 0px 3px 0px 3px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, .2);
+    float: left;
+    cursor: pointer;
+    background-color: rgba(251, 251, 251, 0.3);
+}
+
+#all {
+	background-color: lightblue;
+	color: white;
+}
+
+.block01 {
+    margin-top: 200px;
+    
+}
+
+.projectCard {
+    
+    max-width: 650px;
+    min-width: 300px; 
+    margin: 20px 0;
+    width: 100%;
+    height: auto;
+    border: 1px solid gray;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, .4);
+    /* margin-left: 10px;
+    margin-bottom: 10px; */
+    cursor: default;
+    font-family: 'Jeju Gothic', sans-serif !important;
+    background-color: rgba(251, 251, 251, 0.3);
+}
+
+.cardTop {
+    display: flex;
+    align-content: space-between;
+}
+
+.cardCom01 {
+    margin: 0px 5px 10px 0px;
+    flex-grow: 7;
+}
+
+.cardCom02 {
+    font-size: 0.875rem;
+    flex-basis: 70px;
+    flex-shrink: 0;
+    flex-grow: 1;
+    display: inline-block;
+    flex-direction: column;
+    text-align: right;
+    color: black;
+}
+
+.cardCom03 {
+    margin: 10px 0px 0px 0px;
+    line-height: 1.8;
+    color: black;
+}
+
+.cardCom03 p{
+    font-size: 1rem;
+}
+
+.cardCom03 ul li {
+    float: left;
+    border: 1px solid gray;
+    background-color: #2273AA;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, .2);
+    padding: 1px 5px 1px 5px;
+    margin: 0px 5px 5px 0px;
+    font-size: 0.9rem;
+}
+
+.cardCom04 {
+    margin: 10px 0px 15px 0px;
+    line-height: 1.8;
+    color: black;
+}
+
+.cardCom04 p {
+    clear: both;
+    font-size: 1rem;
+}
+
+.cardCom04 ul li {
+    float: left;
+    border: 1px solid gray;
+    background-color: #57CBFF;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, .2);
+    padding: 1px 5px 1px 5px;
+    margin: 0px 5px 5px 0px;
+    font-size: 0.9rem;
+}
+
+.cardCom05 {
+    clear: both;
+    margin: 0px 0px 10px 0px;
+}
+
+.districtOfProject {
+	font-size: 0.9rem;
+	display: inline;
+	color: black;
+	
+}
+
+.category {
+    font-size: 0.9rem;
+    display: inline;
+    color: black;
+}
+.title {
+    font-size: 1.44rem;
+    margin: 5px 0px 10px 0px;
+}
+.title a {
+	color: black;
+	text-decoration: none !important; 
+	cursor: pointer;
+}
+
+.pname {
+    font-size: 1.125rem;
+    display: inline;
+    cursor: text;
+}
+
+.intro {
+    font-size: 0.875rem;
+    font-family: 'Nanum Gothic', sans-serif !important;
+    line-height: 1.3;
+    color: dimgray;
+    cursor: text;
+}

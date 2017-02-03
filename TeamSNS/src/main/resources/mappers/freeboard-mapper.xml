@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="edu.hexa.leejaehoon.freeboard">
+  
+  <select id="selectAll" resultType="edu.hexa.leejaehoon.domain.FreeBoardVO">
+      select * from free_board ORDER BY regdate desc
+   </select>
+   
+   <insert id="insert">
+      insert into free_board (title,content,writer_uid) value (#{title},#{content},#{writer_uid})
+   </insert>
+  
+     <select id="selectBno" resultType="edu.hexa.leejaehoon.domain.FreeBoardVO">
+        SELECT * FROM pentacore.free_board WHERE bno = #{bno}
+     </select>
+  
+  	   <select id="totalCount" resultType="Integer">
+      select count(*) from free_board
+   </select>
+    
+    <select id="listPage" resultType="edu.hexa.leejaehoon.domain.FreeBoardVO">
+   SELECT b.*
+FROM (
+   SELECT @rownum := @rownum +1 AS rownum, pentacore.free_board.* 
+   FROM pentacore.free_board, (SELECT @rownum := 0) bno
+    ORDER BY pentacore.free_board.regdate DESC
+) b
+WHERE rownum between #{start } and #{end }
+    </select>
+   <delete id="delete">
+   DELETE FROM pentacore.free_board WHERE bno = #{bno}
+   </delete>
+   
+   <update id="update">
+   UPDATE pentacore.free_board SET title = #{title }, content = #{content}  
+   WHERE bno = #{bno} 
+   </update>
+   
+<update id="update_hits">
+UPDATE pentacore.free_board SET hits = hits + 1 
+WHERE bno = #{bno }
+</update>
+  
+  
+  
+  </mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="edu.hexa.leejaehoon.qaboard">
+  
+  <select id="selectAllQa" resultType="edu.hexa.leejaehoon.domain.QaBoardVO">
+      select * from qa_board ORDER BY regdate desc
+   </select>
+   
+   <insert id="insertQa">
+      insert into qa_board (title,content,writer_uid) value (#{title},#{content},#{writer_uid})
+   </insert>
+  
+     <select id="selectBno" resultType="edu.hexa.leejaehoon.domain.QaBoardVO">
+        SELECT * FROM pentacore.qa_board WHERE bno = #{bno}
+     </select>
+  
+  	   <select id="totalCount" resultType="Integer">
+      select count(*) from tt_board
+   </select>
+    
+    <select id="listPage" resultType="edu.hexa.leejaehoon.domain.QaBoardVO">
+   SELECT b.*
+FROM (
+   SELECT @rownum := @rownum +1 AS rownum, pentacore.qa_board.* 
+   FROM pentacore.qa_board, (SELECT @rownum := 0) bno
+    ORDER BY pentacore.qa_board.regdate DESC
+) b
+WHERE rownum between #{start } and #{end }
+    </select>
+   <delete id="delete">
+   DELETE FROM pentacore.qa_board WHERE bno = #{bno}
+   </delete>
+   
+   <update id="update">
+   UPDATE pentacore.qa_board SET title = #{title }, content = #{content}  
+   WHERE bno = #{bno} 
+   </update>
+
+<!-- 조회수 -->
+<update id="update_hits">
+UPDATE pentacore.qa_board SET hits = hits + 1 
+WHERE bno = #{bno }
+</update>   
+
+</mapper>

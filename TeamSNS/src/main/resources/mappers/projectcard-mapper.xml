@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.penta.seungbae.projectcard">
+
+	<select id="selectAll" resultType="edu.hexa.seungbae.domain.ProjectCardDTO">
+		SELECT
+			p.pid, p.category, p.pname, p.intro, p.district, p.meeting_area, p.start, p.end,
+			concat(rs.skill_1, ',', rs.skill_2, ',', rs.skill_3, ',', rs.skill_4,',', rs.skill_5, ',', 
+					rs.skill_6, ',', rs.skill_7, ',', rs.skill_8, ',', rs.skill_9,',', rs.skill_10) skills,
+			rp.title, rp.rbno, rp.recruit_hits, rp.rcstart, rp.rcend,
+			group_concat(mpp.part separator ',') parts
+		FROM
+			pentacore.project p, pentacore.required_skill rs,
+			pentacore.recruit_project rp, pentacore.manage_project_part mpp
+		WHERE
+			p.pid = rs.pid and rs.pid = rp.pid and p.pid = mpp.pid
+		Group by
+			pid
+		Order by 
+			rp.rbno desc
+		Limit
+			0, 5
+	</select>
+
+	<select id="selectByDistricts" resultType="edu.hexa.seungbae.domain.ProjectCardDTO">
+		SELECT
+			p.pid, p.category, p.pname, p.intro, p.district, p.meeting_area, p.start, p.end,
+			concat(rs.skill_1, ',', rs.skill_2, ',', rs.skill_3, ',', rs.skill_4, ',', rs.skill_5, ',', 
+					rs.skill_6, ',', rs.skill_7, ',', rs.skill_8, ',', rs.skill_9, ',', rs.skill_10) skills,
+			rp.title, rp.rbno, rp.recruit_hits, rp.rcstart, rp.rcend,
+			group_concat(mpp.part separator ',') parts
+		FROM
+			pentacore.project p, pentacore.required_skill rs,
+			pentacore.recruit_project rp, pentacore.manage_project_part mpp
+		WHERE 
+			p.pid = rs.pid and rs.pid = rp.pid and p.pid = mpp.pid
+			<if test = "list != null and !list.isEmpty">
+			AND 
+			<foreach collection="list" item="district" open="(" close=")" separator="or">
+			p.district Like concat('%',#{district},'%')
+			</foreach>
+			</if>
+		Group by 
+			pid
+		Order by rp.rbno desc
+	</select>
+	
+	<select id="selectMaxRbno" resultType="Integer">
+	SELECT max(rbno) FROM recruit_project
+	</select>
+	
+	<select id="selectInfiniteDown" resultType="edu.hexa.seungbae.domain.ProjectCardDTO">
+		SELECT
+			p.pid, p.category, p.pname, p.intro, p.district, p.meeting_area, p.start, p.end,
+			concat(rs.skill_1, ',', rs.skill_2, ',', rs.skill_3, ',', rs.skill_4, ',', rs.skill_5, ',', 
+					rs.skill_6, ',', rs.skill_7, ',', rs.skill_8, ',', rs.skill_9, ',', rs.skill_10) skills,
+			rp.title, rp.rbno, rp.recruit_hits, rp.rcstart, rp.rcend,
+			group_concat(mpp.part separator ',') parts
+		FROM
+			pentacore.project p, pentacore.required_skill rs,
+			pentacore.recruit_project rp, pentacore.manage_project_part mpp
+		WHERE 
+			p.pid = rs.pid and rs.pid = rp.pid and p.pid = mpp.pid and
+			(rp.rbno &gt;= #{rbno}-5) and (rp.rbno &lt; #{rbno})
+		Group by 
+			pid
+		Order by 
+			rp.rbno desc		
+	</select>
+	
+	<select id="selectInfiniteUp" resultType="edu.hexa.seungbae.domain.ProjectCardDTO">
+		SELECT
+			p.pid, p.category, p.pname, p.intro, p.district, p.meeting_area, p.start, p.end,
+			concat(rs.skill_1, ',', rs.skill_2, ',', rs.skill_3, ',', rs.skill_4, ',', rs.skill_5, ',', 
+					rs.skill_6, ',', rs.skill_7, ',', rs.skill_8, ',', rs.skill_9, ',', rs.skill_10) skills,
+			rp.title, rp.rbno, rp.recruit_hits, rp.rcstart, rp.rcend,
+			group_concat(mpp.part separator ',') parts
+		FROM
+			pentacore.project p, pentacore.required_skill rs,
+			pentacore.recruit_project rp, pentacore.manage_project_part mpp
+		WHERE 
+			p.pid = rs.pid and rs.pid = rp.pid and p.pid = mpp.pid and
+			(rp.rbno &gt; #{rbno}) and (rp.rbno &lt;= #{rbno} + 5)
+		Group by 
+			pid
+		Order by 
+			rp.rbno desc		
+	</select>
+</mapper>  

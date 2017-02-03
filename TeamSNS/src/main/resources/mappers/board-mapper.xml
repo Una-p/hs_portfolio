@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="edu.hexa.leejaehoon.board">
+     
+     
+   <select id="selectAllTip" resultType="edu.hexa.leejaehoon.domain.BoardVO">
+      select * from tt_board ORDER BY regdate desc;
+   </select>
+   
+   <insert id="insertTip">
+      insert into tt_board (title,content,writer_uid) value (#{title},#{content},#{writer_uid})
+   </insert>
+  
+     <select id="selectBno" resultType="edu.hexa.leejaehoon.domain.BoardVO">
+        SELECT * FROM pentacore.tt_board WHERE bno = #{bno}
+     </select>
+     
+     
+     <select id="totalCount" resultType="Integer">
+      select count(*) from tt_board
+   </select>
+    
+    <select id="listPage" resultType="edu.hexa.leejaehoon.domain.BoardVO">
+	   SELECT b.bno, b.title, b.content, b.writer_uid, b.regdate, b.recommend, b.hits
+	FROM (
+	   SELECT @rownum := @rownum +1 AS rownum, pentacore.tt_board.* 
+	   FROM pentacore.tt_board, (SELECT @rownum := 0) bno
+	    ORDER BY pentacore.tt_board.regdate DESC
+	) b
+	WHERE rownum between #{start } and #{end }
+    </select>    
+
+   <delete id="delete">
+   DELETE FROM pentacore.tt_board WHERE bno = #{bno}
+   </delete>
+   
+   <update id="update">
+   UPDATE pentacore.tt_board SET title = #{title }, content = #{content}  
+   WHERE bno = #{bno} 
+   </update>
+   
+	<!-- 조회수 -->
+	<update id="update_hits">
+	UPDATE pentacore.tt_board SET hits = hits + 1 
+	WHERE bno = #{bno }
+	</update>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.penta.hyunsun.mypage-mapper">
+
+<select id="mypage-select" resultType="edu.hexa.teamsns.domain.UserVO">
+select * from pentacore.user where uid = #{uid }
+</select>
+
+<update id="user-update">
+UPDATE pentacore.user 
+SET pw = #{pw}, nickname = #{nickname}, phone = #{phone}, 
+kkoid = #{kkoid}, email = #{email}, address = #{address}
+WHERE uid=#{uid }
+</update>
+
+<delete id="user-bye">
+DELETE FROM pentacore.user WHERE uid = ${uid }
+</delete>
+
+<select id="my-board" resultType="edu.penta.hyunsun.domain.BoardVO">
+(SELECT @bk := 'tt' AS bk, tt.bno, tt.title
+FROM pentacore.tt_board AS tt WHERE writer_uid = #{uid}
+ORDER BY bno DESC) 
+UNION
+(SELECT @bk := 'free' AS bk, free.bno, free.title
+FROM pentacore.free_board AS free WHERE writer_uid = #{uid}
+ORDER BY bno DESC)
+</select>
+
+</mapper>

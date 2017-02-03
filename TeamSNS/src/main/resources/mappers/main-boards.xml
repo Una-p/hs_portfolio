@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.penta.seungbae.mainBaords">
+  
+<select id="selectTnTBoard" resultType="edu.hexa.seungbae.domain.MainPageTTBoardDTO">
+SELECT
+	user.nickname, tt.title
+FROM
+	pentacore.tt_board tt, pentacore.user user
+WHERE
+	tt.writer_uid = user.uid
+ORDER BY
+	tt.bno desc
+LIMIT
+	5
+</select>  
+
+<select id="selectProjectsInMain" resultType="edu.hexa.seungbae.domain.MainPageProjectDTO">
+SELECT 
+	pname, district 
+FROM 
+	pentacore.project AS project
+JOIN 
+	pentacore.recruit_project AS recruit 
+ON 
+	recruit.pid = project.pid
+ORDER BY 
+	recruit.rbno DESC
+LIMIT 
+	5
+</select>
+
+<select id="selectQaBoard" resultType="edu.hexa.seungbae.domain.MainPageQABoardDTO">
+SELECT
+	user.nickname, qa.title
+FROM
+	pentacore.qa_board qa, pentacore.user user
+WHERE
+	qa.writer_uid = user.uid
+ORDER BY
+	qa.bno desc
+LIMIT
+	5;
+</select>
+
+<select id="selectInfoBaord" resultType="edu.hexa.seungbae.domain.MainPageInfoBoardDTO">
+SELECT 
+	title, regdate 
+FROM 
+	pentacore.info_board
+order by 
+	regdate desc
+LIMIT 5;
+</select>
+</mapper>

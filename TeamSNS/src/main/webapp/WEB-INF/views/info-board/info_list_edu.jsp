@@ -1,0 +1,262 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>정부 제공 정보 리스트</title>
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!-- 달력 -->
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- 달력 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <style>
+    /* 달력크기 */
+    *{
+    	margin:0;
+    	padding:0;
+    }
+    .ui-datepicker {
+        width: 300px;
+    }
+    
+    
+    #div_info_list_main {
+    	position: fixed;
+    	left:260px;
+        width: 1000px;
+        height: 900px;
+        border: solid;
+        margin: 20px
+    }
+    
+    div, table {
+        margin: 20px;
+        font-size: 20px;
+    }
+    
+    h1 {
+        background-color: aquamarine;
+    }
+    
+    .category {
+        width: 310px;
+    }
+    
+    table,
+    td,
+    tr,
+    th {
+        border: 1px solid;
+        text-align: center;
+    }
+    
+    table {
+        width: 950px;
+    }
+    
+    th {
+        background-color: cornflowerblue;
+    }
+    
+    #info_board_bno {
+        width: 80px;
+    }
+    
+    #info_title {
+        width: 380px;
+    }
+    
+    #info_category {
+        width: 90px;
+    }
+    
+    #info_id {
+        width: 230px;
+    }
+    
+    #info_end {
+        width: 100px;
+    }
+    /* 모달창 시작 */
+    
+    form > div {
+        margin: 20px;
+        font-size: 25px;
+    }
+    
+    #div_info_register_main {	
+        width: 500px;
+        border: solid;
+        margin: 20px;
+    }
+    
+    h1 {
+        background-color: aquamarine;
+    }
+    
+    .form-control {
+        font-size: 20px;
+    }
+    
+    #info_register_end {
+        width: 6em;
+    }
+    
+    #info_register_title,
+    #info_register_url {
+        width: 350px;
+    }
+    
+    #info_register_category {
+        width: 8em;
+    }
+    /* 모달창 끝 */
+</style>
+</head>
+<body>
+
+<jsp:include page="../signup/include.jsp" flush="false"></jsp:include>
+
+<div class="div1table" id="div_info_list_main">
+        <div class="div1table">
+            <h1>정보 리스트</h1></div>
+        <br>
+        <div class="div1table" id="category">
+            <input type="button" class="category btn btn-info" value="창업교육" onclick="location.href='info_list_edu.html'" />
+            <input type="button" class="category btn btn-default" value="멘토링" onclick="location.href='info_list_mentor.html'" />
+            <input type="button" class="category btn btn-default" value="행사" onclick="location.href='info_list_event.html'" /> </div>
+        <table class="div1table">
+            <tr>
+                <th>글번호</th>
+                <th>글제목</th>
+                <th>카테고리</th>
+                <th>정보제공</th>
+                <th>마감일자</th>
+            </tr>
+            <tr>
+                <td id="info_board_bno" name="info_board_bno"> 글번호 </td>
+                <td id="info_title" name="info_title"><a href="http://www.k-startup.go.kr/common/announcement/announcementDetail.do?_searchTargetAgeCodeAll=on&searchDtlAncmSn=0&searchAppAtBinet=&searchTargetAgeCodeAll=A&searchPrefixCode=BOARD_701_001&_searchTargetComAgeCodeAll=on&searchTargetTypeCodeAll=A&searchAncmId=&searchType=&_searchAreaCodeAll=on&searchSortOrder=DATE&_searchTargetTypeCodeAll=on&pageIndex=1&searchKeyword=&searchTargetComAgeCodeAll=A&searchAreaCodeAll=A&searchAppAt=A&_searchTargetComAgeCode=onononononon&CSRF_NONCE=siEW4BB6hDOUOiglFh4/R5EZ&searchPostSn=77089&searchDetailAt=A&_searchTargetTypeCode=ononononononon&bid=701&_searchAreaCode=onononononononononononononononononon&mid=30014&searchSupportBizTypeCodeAll=N&_searchTargetAgeCode=ononon&searchBusinessSn=0">『스마트창작터』교육생 2차 모집공고</a></td>
+                <td id="info_category" name="info_category"> 창업교육 </td>
+                <td id="info_id" name="info_id">창업진흥원</td>
+                <td id="info_end" name="info_end">20161202</td>
+            </tr>
+            <tr>
+                <td>글번호</td>
+                <td>ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</td>
+                <td></td>
+                <td>ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ</td>
+                <td></td>
+            </tr>
+        </table>
+        <br>
+        <ul class="page-links"> 페이지 링크 </ul>
+        <!--<div> 현재 페이지에서 이동
+            <input type="button" value="parkDex" name="parkDexBtn" onclick="location.href='http://parkDex.tistory.com'">
+            <br/>
+            <br/> 새 창에서 이동
+            <input type="button" value="parkDex2" name="parkDex2Btn" onclick="window.open('http://parkDex.tistory.com')"> </div>-->
+        <!-- 모달 시작 -->
+        <div class="div1table">
+            <!-- 버튼 -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="btnReset"> 새글 작성 </button>
+            <!-- 모달 팝업 -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel"></h4> </div>
+                        <div class="modal-body">
+                            <!-- 모달안에 들어갈 내용 -->
+                            <div id="div-main">
+                                <form action="">
+                                    <div>
+                                        <div>
+                                            <h1>정부 정보 등록</h1></div>
+                                        <br>
+                                        <div class="form-group form-inline" id="div_info_board_title">
+                                            <label for="info_register_title" class="label label-default">제목</label>
+                                            <br>
+                                            <input type="text" class="form-control" id="info_register_title" name="info_board_title" placeholder="20글자" required maxlength="20"> </div>
+                                        <div class="form-group form-inline" id="div_info_category">
+                                            <label for="info_category" class="label label-default">카테고리</label>
+                                            <br>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="info_category" id="category_register_edu" value="창업교육"> 창업교육 </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="info_category" id="category_register_mentor" value="멘토링"> 멘토링 </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="info_category" id="category_register_event" value="행사"> 행사 </label>
+                                        </div>
+                                        <div class="form-group form-inline" id="div_info_url">
+                                            <label for="info_register_url" class="label label-default">URL</label>
+                                            <br>
+                                            <input type="url" class="form-control" id="info_register_url" name="info_url" placeholder="http:// 반드시 넣을것!!" required> </div>
+                                        <div class="form-group form-inline" id="div_info_id">
+                                            <label for="info_register_id" class="label label-default">정보제공</label>
+                                            <br>
+                                            <input type="text" class="form-control" id="info_register_id" name="info_id" placeholder="12글자" required maxlength="12"> </div>
+                                        <!-- 마감일자의 저장방식 << 1) 날짜선택 : info_end=20161201 >> << 2) 상시모집 : info_end_every=상시모집 >> -->
+                                        <div class="form-group form-inline" id="div_info_end">
+                                            <label for="info_end" class="label label-default">마감일자</label>
+                                            <br>
+                                            <input type="text" class="form-control" id="info_register_end" name="info_end">
+                                            <br>
+                                            <input type="checkbox" id="info_end_every" name="info_end_every" value="상시모집" onclick="checkDisable(this.form)">
+                                            <label for="info_end_every">상시모집</label>
+                                        </div>
+                                        <br>
+                                        <input type="submit" class="btn btn-primary btn-lg" value="등록 하기"> </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- 모달 내용 끝 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            /* 달력 */
+            $(document).ready(function () {
+                $("#info_register_end").datepicker({
+                    dateFormat: 'yymmdd'
+                    , monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+                    , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
+                    , changeMonth: true, //월변경가능
+                    changeYear: true, //년변경가능
+                    showMonthAfterYear: true //년 뒤에 월 표시
+                });
+                /* 폼 초기화 */
+                $("#btnReset").click(function () {
+                    $("form").each(function () {
+                        this.reset();
+                    });
+                });
+                /* 글자길이 체크 */
+                $('#info_register_title, #info_register_id').keyup(function () {
+                    if ($(this).val().length > $(this).attr('maxlength')) {
+                        alert('제한길이 초과');
+                        $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                    }
+                });
+            });
+            /* 상시모집 체크박스 */
+            function checkDisable(frm) {
+                if (frm.info_end_every.checked == true) {
+                    frm.info_end.disabled = true;
+                }
+                else {
+                    frm.info_end.disabled = false;
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

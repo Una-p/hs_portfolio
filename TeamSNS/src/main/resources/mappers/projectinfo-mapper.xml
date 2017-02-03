@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="edu.hexa.leejaehoon.projectinfo">
+	
+	<select id="selectProject" resultType="edu.hexa.leejaehoon.domain.ProjectInfoVO">
+		SELECT p.pid, p.category, p.pname, p.intro, p.start, p.end, r.rbno
+		FROM pentacore.project AS p 
+		JOIN pentacore.recruit_project AS r
+		ON p.pid = r.pid
+		WHERE p.pid IN (SELECT pid FROM pentacore.project_leader WHERE leader_uid = #{uid })
+	</select>
+	
+	<sql id="find-pid">
+		SELECT pid FROM pentacore.recruit_project WHERE rbno = #{rbno }
+	</sql>
+
+	<update id="update-recruit">
+		UPDATE pentacore.recruit_project 
+		SET title = #{title}, rcstart=#{rcstart }, rcend=#{rcend } 
+		WHERE rbno=#{rbno }
+		<!-- ${title } : 모집글 제목, ${rcstart, rcend } : 모집기간 -->
+	</update>
+
+	<update id="update-project">
+		UPDATE pentacore.project 
+		SET pname = #{pname }, category = #{category }, start = #{start}, end = #{end}, 
+		intro = #{intro }, district = #{district }
+		WHERE pid = (<include refid="find-pid" />)
+	</update>
+
+	<update id="update-skill">
+		UPDATE pentacore.required_skill
+		SET skill_1 = #{skill_1 }, skill_2 = #{skill_2 }, skill_3 = #{skill_3 }, skill_4 = #{skill_4 }, skill_5 = #{skill_5 }, skill_6 = #{skill_6 },
+		skill_7 = #{skill_7 }, skill_8 = #{skill_8 }, skill_9 = #{skill_9 }, skill_10 = #{skill_10 }
+		WHERE pid = (<include refid="find-pid" />)
+	</update>
+	
+	
+<!-- hshshs -->
+<!-- 내가 지원한 프로젝트 리스트 : (프로젝트 아이디, 파트PK), 프로젝트 이름, 파트, 지원코멘트, 상태  -->
+<select id="select-myapply" resultType="edu.hexa.leejaehoon.domain.MyApplyDTO">
+SELECT pro.pid, app.part_pk, pro.pname, app.part, app.comment, app.apply_regdate, app.state
+FROM pentacore.project AS pro
+JOIN (
+SELECT apply.*, part.pid, part.part
+FROM pentacore.manage_recruit AS apply
+JOIN pentacore.manage_project_part AS part 
+ON part.part_pk = apply.part_pk
+WHERE apply.user_id = #{uid}
+) AS app 
+ON app.pid = pro.pid
+</select>
+
+<!-- 내 프로젝트의 지원자들 관리:3c -->
+<select id="select-mycandidate" resultType="edu.hexa.leejaehoon.domain.MyCandidateDTO">
+<!-- 프로젝트 아이디, 파트PK, 프로젝트 이름, 파트, 지원자 아이디, 지원멘트, 지원날짜, 상태 -->
+SELECT search.pid, search.part_pk, project.pname, search.part, search.user_id, search.comment, search.apply_regdate, search.state FROM 
+(
+SELECT leader.leader_uid, apply.pid, apply.part_pk, apply.part, apply.user_id, apply.comment, apply.apply_regdate, apply.state FROM
+(SELECT mr.*, mpp.pid, mpp.part FROM pentacore.manage_recruit AS mr
+JOIN pentacore.manage_project_part AS mpp ON mr.part_pk = mpp.part_pk) AS apply
+LEFT JOIN pentacore.project_leader AS leader
+ON apply.pid = leader.pid
+WHERE leader.leader_uid = #{uid}
+) AS search
+JOIN pentacore.project AS project
+ON project.pid = search.pid
+</select>
+
+
+<!-- 신청 수락 -->
+<!-- 1. 수락한  part_pk 랑 user_id 받아와서 상태변경 (2: 수락) -->
+<update id="apply-accept1">
+UPDATE pentacore.manage_recruit SET state = 2 
+WHERE part_pk = #{part_pk} AND user_id = #{user_id}
+</update>
+<!-- 2. 다른 지원자들 상태 3으로 변경(거절) -->
+<update id="apply-accept2">
+UPDATE pentacore.manage_recruit SET state = 3
+WHERE part_pk = #{part_pk} AND state = 1
+</update>
+<!-- 3.manage_project_part에 user_id 추가 -->
+<update id="apply-accept3">
+UPDATE pentacore.manage_project_part 
+SET user_id = #{user_id }
+WHERE part_pk = #{part_pk}
+</update>
+
+<!-- 거절 -->
+<update id="apply-reject">
+UPDATE pentacore.manage_recruit SET state = 3
+WHERE part_pk = #{part_pk} AND user_id = #{user_id}
+</update>
+
+</mapper>
+
+
+
+

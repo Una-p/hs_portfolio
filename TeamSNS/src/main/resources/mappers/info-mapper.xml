@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.hexa.minjee.InfoMapper">
+	<insert id="insert">
+	insert into info_board(category, title, url, start, end, user_id)
+	values (#{category}, #{title}, #{url}, #{start}, #{end}, #{user_id})
+	</insert>
+	
+	<select id="selectAll" resultType="edu.hexa.teamsns.domain.InfoBoardVO">
+	select * from info_board
+	order by bno desc;
+	</select>
+	
+	<select id="select" resultType="edu.hexa.teamsns.domain.InfoBoardVO">
+	select * from info_board
+	where bno = #{bno}
+	</select>
+	
+	<update id="update">
+	update info_board
+	set title = #{title}, url = #{url}, 
+		start = #{start}, end = #{end},
+		regdate = current_timestamp
+	where bno = #{bno}
+	</update>
+	
+	<delete id="delete">
+	delete from info_board
+	where bno = #{bno}
+	</delete>
+	
+	<!-- 페이징 처리 -->
+	<select id="totalCount" resultType="Integer">
+	select count(*) from info_board
+	where category = #{category}
+	</select>
+	
+	<select id="listPage" parameterType="hashmap" resultType="edu.hexa.teamsns.domain.InfoBoardVO" >
+	select b.*
+		from (
+			select @rn:=@rn+1 as rownum, a.*
+			from (	
+				select * from info_board
+				where category = #{vo.category}
+				order by bno desc
+			) a, (select @rn:=0) as r
+		) b
+		where b.rownum between #{c.start} and #{c.end}
+	</select>
+	
+</mapper>
