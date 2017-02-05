@@ -45,7 +45,7 @@ RDBMS: MySQL 5.6(Work Bench) <br/>
 ## 2. 담당 업무 상세
 
 ### 2.1 프로젝트 전체적인 DB 테이블 설계 및 관리 <br/>
-![Alt text](/hs_portfolio/ERD.png)
+![Alt text](/ERD.png)
 
 - 18개의 테이블로 구성
 - 크게 User, Project, Board 라는 주제에 맞춰 테이블을 세분화
